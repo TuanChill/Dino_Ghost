@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.container {
+    position: relative;
+    max-width: 1280px;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: #ffffff;
+    display: flex;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+/* side bar section */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 120px;
+    height: 100%;
+    border-right: 1px solid #000000;
+}
+
+.menu-btn {
+    cursor: pointer;
+    padding-top: 50px;
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40px;
+}
+
+.social-item + .social-item {
+    margin-top: 20px;
+}
+
+.app {
+    flex: 1;
+    padding-top: 25px;
+    padding: 25px 52px 0 52px;
+}
+
+/* header section */
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+}
+
+.nav_active {
+    border-bottom: 1px solid #000000;
+}
+
+.nav-item-logo {
+    display: flex;
+    align-items: center;
+    margin-right: 54px;
+}
+
+.nav-item-logo span {
+    margin-left: 6px;
+    font-weight: 600;
+}
+
+.nav-item, .nav-item-logo {
+    cursor: pointer;
+    padding-bottom: 2px;
+    /* padding: 4px; */
+}
+
+.nav-item + .nav-item {
+    margin-left: 54px;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+}
+
+.cart .cart-icon {
+    cursor: pointer;
+}
+
+.content {
+
+}
