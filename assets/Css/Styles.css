@@ -1,113 +1,202 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 :root {
-    
+  --black: #000000;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--black);
 }
 
 .container {
-    position: relative;
-    max-width: 1280px;
-    height: 100vh;
-    margin: 0 auto;
-    background-color: #ffffff;
-    display: flex;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: relative;
+  max-width: 1280px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #ffffff;
+  display: flex;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 /* side bar section */
 
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 120px;
-    height: 100%;
-    border-right: 1px solid #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 120px;
+  height: 100%;
+  border-right: 1px solid var(--black);
 }
 
 .menu-btn {
-    cursor: pointer;
-    padding-top: 50px;
+  cursor: pointer;
+  padding-top: 50px;
 }
 
 .socials {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
 }
 
 .social-item + .social-item {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .app {
-    flex: 1;
-    padding-top: 25px;
-    padding: 25px 52px 0 52px;
+  flex: 1;
+  padding-top: 25px;
+  padding: 25px 52px 0 52px;
 }
 
 /* header section */
 .header {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header .main {
+  display: flex;
 }
 
 .nav-bar {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .nav_active {
-    border-bottom: 1px solid #000000;
+  border-bottom: 1px solid var(--black);
 }
 
+.header-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 54px;
+}
+
+.header-logo span {
+  margin-left: 6px;
+  font-weight: 600;
+}
+
+.nav-item,
 .nav-item-logo {
-    display: flex;
-    align-items: center;
-    margin-right: 54px;
-}
-
-.nav-item-logo span {
-    margin-left: 6px;
-    font-weight: 600;
-}
-
-.nav-item, .nav-item-logo {
-    cursor: pointer;
-    padding-bottom: 2px;
-    /* padding: 4px; */
+  cursor: pointer;
+  line-height: 27px;
 }
 
 .nav-item + .nav-item {
-    margin-left: 54px;
+  margin-left: 54px;
 }
 
 .cart {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .cart .cart-icon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .content {
+  display: flex;
+}
 
+.product-info {
+  width: 50%;
+  text-transform: capitalize;
+}
+
+.product-name {
+  font-size: 5.5rem;
+  font-weight: 700;
+  margin-top: 126px;
+  line-height: 82px;
+  margin-bottom: 2px;
+}
+
+.product-code {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #979797;
+  line-height: 22px;
+}
+
+.product-type {
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 27px;
+  margin: 10px 0;
+}
+
+.product-price {
+  font-size: 4.8rem;
+  font-weight: 700;
+  line-height: 72px;
+  margin-bottom: 48px;
+}
+
+.btn-buy {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  width: 212px;
+  height: 58px;
+  outline: none;
+  background-color: var(--black);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.product-preview {
+  margin-top: 56px;
+}
+
+.product-img {
+    width: 450px;
+    height: 450px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.btn-select-item + .btn-select-item {
+  margin-left: 20px;
+}
+
+.btn-select-item {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: var(--black);
+  cursor: pointer;
+  transition: all 2s linear;
+}
+
+.btn-select-item:not(.selected):hover {
+  opacity: 0.6;
+}
+
+.btn-select-item.selected {
+  width: 80px;
+  cursor: not-allowed;
+  transition: width 5s linear;
 }

@@ -7,13 +7,14 @@
     <link rel="icon" href="./assets/Icons/Dino-Ghost.png" type="image/gif" sizes="16x16" />
     <link rel="stylesheet" href="./assets/Css/Reset.css" />
     <link rel="stylesheet" href="./assets/Css/Styles.css" />
+    <link rel="stylesheet" href="./assets/Css/Reponsive.css">
     <title>Dino Ghost</title>
   </head>
   <body>
     <div class="container">
       <div class="sidebar">
         <div class="menu-btn">
-          <img src="./assets/Icons/Menu.png" alt="Menu-Icon" />
+          <img class="menu-icon" src="./assets/Icons/Menu.png" alt="Menu-Icon" />
         </div>
         <div class="socials">
           <a class="social-item" href="/">
@@ -29,31 +30,34 @@
       </div>
       <div class="app">
         <div class="header">
-          <ul class="nav-bar">
-            <li class="nav-item-logo">
-              <img src="./assets/Icons/Dino-Ghost.png" alt="Dino-Ghost" />
-              <span class="" >Dino Ghost</span>
-            </li>
-            <li class="nav-item nav_active">
-              <span>Ghost</span>
-            </li>
-            <li class="nav-item">
-              <span>Pumpkin</span>
-            </li>
-            <li class="nav-item">
-              <span>Bat</span>
-            </li>
-            <li class="nav-item">
-              <span>Customize </span>
-            </li>
-          </ul>
+          <div class="main">
+            <div class="header-logo">
+              <img class="logo-icon" src="./assets/Icons/Dino-Ghost.png" alt="Dino-Ghost" />
+              <span class="">Dino Ghost</span>
+            </div>
+            <ul class="nav-bar">
+              <li class="nav-item nav_active">
+                <span>Ghost</span>
+              </li>
+              <li class="nav-item">
+                <span>Pumpkin</span>
+              </li>
+              <li class="nav-item">
+                <span>Bat</span>
+              </li>
+              <li class="nav-item">
+                <span>Customize </span>
+              </li>
+            </ul>
+          </div>
           <div class="cart">
-            <img class="cart-icon" src="./assets/Icons/Cart.png" alt="Cart">
+            <img class="cart-icon" src="./assets/Icons/Cart.png" alt="Cart" />
           </div>
         </div>
-        <div class="content"></div>
+        <div class="content">
+        </div>
       </div>
     </div>
-    <script href="./assets/Javascript/app.js"></script>
+    <script src="./assets/Javascript/app.js"></script>
   </body>
 </html>
