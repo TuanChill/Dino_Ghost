@@ -19,17 +19,18 @@ body {
   font-size: 1.8rem;
   font-weight: 400;
   color: var(--black);
+  overflow: hidden;
 }
 
 .container {
-  position: relative;
   max-width: 1280px;
   height: 100vh;
   margin: 0 auto;
   background-color: #ffffff;
-  display: flex;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: flex;
 }
+
 
 /* side bar section */
 
@@ -94,11 +95,19 @@ body {
   font-weight: 600;
 }
 
+.close-btn {
+  display: none;
+}
+
 .nav-item,
 .nav-item-logo {
   cursor: pointer;
   line-height: 27px;
 }
+
+  .nav-item {
+    padding: 4px;
+  }
 
 .nav-item + .nav-item {
   margin-left: 54px;
@@ -158,9 +167,15 @@ body {
   width: 212px;
   height: 58px;
   outline: none;
+  border: none;
   background-color: var(--black);
   border-radius: 10px;
   cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.btn-buy:hover {
+  background-color: rgb(0, 0, 0, 0.8);
 }
 
 .product-preview {
@@ -188,7 +203,6 @@ body {
   border-radius: 20px;
   background-color: var(--black);
   cursor: pointer;
-  transition: all 2s linear;
 }
 
 .btn-select-item:not(.selected):hover {
@@ -198,5 +212,4 @@ body {
 .btn-select-item.selected {
   width: 80px;
   cursor: not-allowed;
-  transition: width 5s linear;
 }

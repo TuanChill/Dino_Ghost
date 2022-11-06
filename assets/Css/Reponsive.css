@@ -1,0 +1,160 @@
+/* mobile */
+
+@media (max-width: 480px) {
+  .container {
+    flex-direction: row-reverse;
+    padding: 24px;
+  }
+
+  .cart {
+    padding-right: 70px;
+  }
+
+  .sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 70px;
+    border: none;
+  }
+
+  .menu-btn {
+    padding-top: 30px;
+  }
+
+  .socials {
+    display: none;
+  }
+
+  .header-logo span {
+    font-size: 1rem;
+    line-height: 15px;
+  }
+
+  .nav-bar {
+    padding-top: 92px;
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    flex-direction: column;
+    background-color: #ffffff;
+    transform: translateX(100%);
+    transition: all 0.5s linear;
+  }
+
+  .close-btn {
+    display: block;
+    position: absolute;
+    top: 26px;
+    right: 26px;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .nav-item {
+    padding: 4px;
+  }
+
+  .nav-item + .nav-item {
+    margin-left: 0;
+    margin-top: 36px;
+  }
+
+  .logo-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .menu-icon {
+    width: 28px;
+    height: 8.5px;
+  }
+
+  .cart-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .app {
+    padding: 0;
+  }
+
+  .content {
+    flex-direction: column;
+  }
+
+  .product-info {
+    position: relative;
+    width: 100%;
+    padding: 0 50px;
+    text-align: center;
+  }
+
+  .product-name {
+    margin-top: 24px;
+    font-size: 2rem;
+    line-height: 30px;
+  }
+
+  .product-code {
+    margin-top: 8px;
+    font-size: 1rem;
+    line-height: 15px;
+  }
+
+  .product-type {
+    margin-top: 4px;
+    font-size: 1.1rem;
+    line-height: 16px;
+  }
+
+  .product-price {
+    font-size: 2rem;
+    line-height: 30px;
+    margin-bottom: 0;
+  }
+
+  .btn-buy {
+    position: absolute;
+    bottom: -328px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 32.83px;
+    font-size: 1.1rem;
+    line-height: 16px;
+  }
+
+  .product-preview {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .product-img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .controls {
+    margin-top: 28px;
+  }
+
+  .btn-select-item {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+  }
+
+  .btn-select-item.selected {
+    width: 40px;
+  }
+
+  .show-nav {
+    transform: translateX(0%);
+  }
+}

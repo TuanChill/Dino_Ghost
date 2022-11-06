@@ -2,6 +2,10 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 const productCard = $(".content");
+const closeBtnNav = $(".close-btn");
+const navBar = $(".nav-bar");
+const menuBtn = $(".menu-btn");
+console.log(menuBtn);
 
 const app = {
   currentProductIndex: 1,
@@ -20,6 +24,14 @@ const app = {
         app.currentProductIndex = Number(e.target.dataset.index);
         app.renderProducts();
       }
+    });
+    // close nav bar
+    closeBtnNav.addEventListener("click", function () {
+      navBar.classList.toggle("show-nav");
+    });
+    // show nav bar
+    menuBtn.addEventListener("click", function () {
+      navBar.classList.toggle("show-nav");
     });
   },
   renderProducts: async function () {
