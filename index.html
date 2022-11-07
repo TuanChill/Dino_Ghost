@@ -12,6 +12,16 @@
   </head>
   <body>
     <div class="container">
+      <!-- toast -->
+      <div class="toast-message">
+        <div class="wrapper">
+          <span class="icon">
+            <img src="./assets/Icons/tick-cirlce.png" alt="tick-cirlce">
+          </span>
+          <span>Item has added to your Shopping Cart</span>
+        </div>
+      </div>
+      <!-- sidebar -->
       <div class="sidebar">
         <div class="menu-btn">
           <img class="menu-icon" src="./assets/Icons/Menu.png" alt="Menu-Icon" />
@@ -29,6 +39,7 @@
         </div>
       </div>
       <div class="app">
+        <!-- header -->
         <div class="header">
           <div class="main">
             <div class="header-logo">
@@ -55,9 +66,32 @@
           </div>
           <div class="cart">
             <img class="cart-icon" src="./assets/Icons/Cart.png" alt="Cart" />
+            <span class="cart-length hidden"></span>
+            <div class="cart-box hidden">
+              <div class="cart-header">
+                <h5 class="cart-title">Shopping Cart</h5>
+                <img class="close-btn" src="./assets/Icons/CloseIcon.png" alt="Close this cart box">
+              </div>
+              <div class="cart-content">
+              </div>
+              <div class="cart-null hidden">
+                <img class="cart-null-img" src="./assets/Imgs/cart-null.png" alt="Cart-null">
+              </div>
+              <button class="btn-checkout">Check Out</button>
+            </div>
           </div>
         </div>
+        <!-- product cart -->
         <div class="content">
+          <div class="product-info">
+            <div class="content">
+
+            </div>
+            <button class="btn-buy">Buy Now</button>
+          </div>
+          <div class="product-preview">
+
+          </div>
         </div>
       </div>
     </div>

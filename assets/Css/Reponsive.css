@@ -47,12 +47,11 @@
     transition: all 0.5s linear;
   }
 
-  .close-btn {
+  .nav-bar .close-btn {
     display: block;
     position: absolute;
     top: 26px;
     right: 26px;
-    cursor: pointer;
     padding: 8px;
   }
 
