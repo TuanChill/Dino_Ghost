@@ -28,7 +28,7 @@ const app = {
   cartLocal: {
     getCartLocal: function () {
       const data = window.localStorage.getItem(CART_LOCAL);
-      app.cart = JSON.parse(data);
+      app.cart = JSON.parse(data) || [];
     },
     setCartLocal: function (cart) {
       window.localStorage.setItem(CART_LOCAL, JSON.stringify(cart));
