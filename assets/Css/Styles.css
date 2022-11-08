@@ -81,7 +81,8 @@ body {
 
 .menu-btn {
   cursor: pointer;
-  padding-top: 50px;
+  padding: 8px;
+  margin-top: 42px;
 }
 
 .socials {

@@ -93,21 +93,49 @@ const app = {
       cartBox.classList.toggle("hidden");
     });
     //hanlde click outside cart-box
-    window.addEventListener("click", function (e) {
-      if (e.target != cartBox && e.target != cartIcon) cartBox.classList.add("hidden");
-    });
-    //handle delete product in cart
+    // ! fix sau
+    // window.addEventListener("click", function (e) {
+    //   if (e.target != cartBox && e.target != cartIcon) cartBox.classList.add("hidden");
+    // });
+
+    //  handle logic cart
     cartContent.addEventListener("click", function (e) {
+      //handle delete product in cart
       const product = e.target.closest(".cart-item");
       const productCode = product.dataset.index;
       const deleteBtn = e.target.closest(".delete-product-btn");
-      if (deleteBtn) {
-        const newCart = app.cart.filter((e) => e.code !== productCode);
+      // get this product clicked
+      const clickedProduct = app.cart.find((e) => e.code === productCode);
+      // filter cart to not have this product
+      const newCart = app.cart.filter((e) => e.code !== productCode);
+      const deleteProduct = () => {
         app.cart = newCart;
         app.renderCartLength();
         app.cartLocal.setCartLocal(newCart);
         app.toggleCartNull();
         product.remove();
+      };
+      if (deleteBtn) {
+        deleteProduct();
+      }
+      // handle quantity change
+      const plusBtn = e.target.closest(".btn-plus");
+      const subBtn = e.target.closest(".btn-sub");
+      if (plusBtn) {
+        app.cart = [...newCart, { ...clickedProduct, quantity: ++clickedProduct.quantity }];
+        app.cartLocal.setCartLocal(app.cart);
+        app.renderCartLength();
+        app.renderCartBox();
+      }
+      if (subBtn) {
+        if (clickedProduct.quantity > 1) {
+          app.cart = [...newCart, { ...clickedProduct, quantity: --clickedProduct.quantity }];
+          app.cartLocal.setCartLocal(app.cart);
+          app.renderCartBox();
+          app.renderCartLength();
+        } else {
+          deleteProduct();
+        }
       }
     });
   },
@@ -166,7 +194,6 @@ const app = {
       app.cart.forEach((e) => {
         cartQuantity += e.quantity;
       });
-      console.log(cartQuantity);
       cartLength.classList.remove("hidden");
       cartLength.innerText = `${cartQuantity}`;
     } else {

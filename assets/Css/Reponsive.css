@@ -10,6 +10,16 @@
     padding-right: 70px;
   }
 
+
+  .cart .cart-length {
+    width: 15px;
+    height: 15px;
+    font-size: 1rem;
+    line-height: 15px;
+    top: -4px;
+    left: 21px
+  }
+
   .sidebar {
     position: absolute;
     top: 0;
@@ -20,7 +30,7 @@
   }
 
   .menu-btn {
-    padding-top: 30px;
+    margin-top: 22px;
   }
 
   .socials {
