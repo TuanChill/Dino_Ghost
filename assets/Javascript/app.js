@@ -4,6 +4,7 @@ const $$ = document.querySelectorAll.bind(document);
 const CART_LOCAL = "DINO_CART";
 
 const productCard = $(".content");
+const container = $(".container");
 const closeBtnNav = $(".close-btn");
 const navBar = $(".nav-bar");
 const menuBtn = $(".menu-btn");
@@ -13,17 +14,24 @@ const productPreview = $(".product-preview");
 const cartLength = $(".cart-length");
 const toastWrapper = $(".toast-message .wrapper");
 const cartBox = $(".cart-box");
-const closeCart = $(".cart-box .close-btn");
-const cartContent = $(".cart-content");
+const closeCart = $$(".close-btn");
+const cartContent = $(".cart-box .cart-content");
 const cartIcon = $(".cart-icon");
-const subQuantityBtn = $(".btn-sub");
-const plusQuantityBtn = $(".btn-plus");
-const cartNull = $(".cart-null");
-
+const cartNull = $$(".cart-null");
+const btnCheckout = $(".btn-checkout");
+const cartFullContent = $(".cart-box-full .cart-content");
+const cartFullBox = $(".cart-box-full");
+const btnContinueShipping = $(".cart-box-full .btn-continue");
+const btnFinishOrder = $(".btn-finish-order");
+const IconFinishOrder = $(".order-res-icon");
+const orderRes = $(".order-respon");
+const paymentEle = $(".payment");
+const btnBackToCart = $(".btn-to-cart");
 const app = {
   currentProductIndex: 1,
   cart: [],
   products: [],
+  orderRes: {},
   currentProduct: {},
   cartLocal: {
     getCartLocal: function () {
@@ -88,55 +96,79 @@ const app = {
     cartIcon.addEventListener("click", function () {
       cartBox.classList.toggle("hidden");
     });
-    //handle hide cart-box
-    closeCart.addEventListener("click", function () {
-      cartBox.classList.toggle("hidden");
-    });
-    //hanlde click outside cart-box
-    // ! fix sau
-    // window.addEventListener("click", function (e) {
-    //   if (e.target != cartBox && e.target != cartIcon) cartBox.classList.add("hidden");
-    // });
-
     //  handle logic cart
-    cartContent.addEventListener("click", function (e) {
-      //handle delete product in cart
-      const product = e.target.closest(".cart-item");
-      const productCode = product.dataset.index;
-      const deleteBtn = e.target.closest(".delete-product-btn");
-      // get this product clicked
-      const clickedProduct = app.cart.find((e) => e.code === productCode);
-      // filter cart to not have this product
-      const newCart = app.cart.filter((e) => e.code !== productCode);
-      const deleteProduct = () => {
-        app.cart = newCart;
-        app.renderCartLength();
-        app.cartLocal.setCartLocal(newCart);
-        app.toggleCartNull();
-        product.remove();
-      };
-      if (deleteBtn) {
-        deleteProduct();
-      }
-      // handle quantity change
-      const plusBtn = e.target.closest(".btn-plus");
-      const subBtn = e.target.closest(".btn-sub");
-      if (plusBtn) {
-        app.cart = [...newCart, { ...clickedProduct, quantity: ++clickedProduct.quantity }];
-        app.cartLocal.setCartLocal(app.cart);
-        app.renderCartLength();
-        app.renderCartBox();
-      }
-      if (subBtn) {
-        if (clickedProduct.quantity > 1) {
-          app.cart = [...newCart, { ...clickedProduct, quantity: --clickedProduct.quantity }];
-          app.cartLocal.setCartLocal(app.cart);
-          app.renderCartBox();
+    [cartContent, cartFullContent].forEach((e) => {
+      e.addEventListener("click", function (e) {
+        //handle delete product in cart
+        const product = e.target.closest(".cart-item");
+        const productCode = product.dataset.index;
+        const deleteBtn = e.target.closest(".delete-product-btn");
+        // get this product clicked
+        const clickedProduct = app.cart.find((e) => e.code === productCode);
+        // filter cart to not have this product
+        const newCart = app.cart.filter((e) => e.code !== productCode);
+        const deleteProduct = () => {
+          app.cart = newCart;
           app.renderCartLength();
-        } else {
+          app.cartLocal.setCartLocal(newCart);
+          app.toggleCartNull();
+          product.remove();
+        };
+        if (deleteBtn) {
           deleteProduct();
         }
+        // handle quantity change
+        const plusBtn = e.target.closest(".btn-plus");
+        const subBtn = e.target.closest(".btn-sub");
+        if (plusBtn) {
+          app.cart = [...newCart, { ...clickedProduct, quantity: ++clickedProduct.quantity }];
+          app.cartLocal.setCartLocal(app.cart);
+          app.renderCartLength();
+          app.renderCartBox();
+        }
+        if (subBtn) {
+          if (clickedProduct.quantity > 1) {
+            app.cart = [...newCart, { ...clickedProduct, quantity: --clickedProduct.quantity }];
+            app.cartLocal.setCartLocal(app.cart);
+            app.renderCartBox();
+            app.renderCartLength();
+          } else {
+            deleteProduct();
+          }
+        }
+      });
+    });
+    //handle hide cart-box
+    closeCart.forEach((e) => {
+      e.addEventListener("click", function () {
+        cartBox.classList.toggle("hidden");
+        cartFullBox.classList.add("hidden");
+      });
+    });
+    // handle lick btn checkout cart
+    btnCheckout.addEventListener("click", function () {
+      if (app.cart.length > 0) {
+        cartFullBox.classList.remove("hidden");
+        cartBox.classList.add("hidden");
+      } else {
+        cartBox.classList.add("hidden");
       }
+    });
+    //hanlde btn continue to shipping
+    btnContinueShipping.addEventListener("click", function () {
+      cartFullBox.classList.add("hidden");
+      if (app.cart.length !== 0) {
+        paymentEle.classList.remove("hidden");
+      }
+    });
+    // handle onClick btn finish shipping
+    btnFinishOrder.addEventListener("click", function () {
+      orderRes.classList.add("hidden");
+    });
+    // handle onClick btn back to cart
+    btnBackToCart.addEventListener("click", function () {
+      paymentEle.classList.add("hidden");
+      cartFullBox.classList.remove("hidden");
     });
   },
   handleBtnBuy: function () {
@@ -153,8 +185,21 @@ const app = {
     }, 3000);
   },
   toggleCartNull: function () {
-    app.cart.length === 0 ? cartNull.classList.remove("hidden") : cartNull.classList.add("hidden");
+    if (app.cart.length === 0) {
+      cartNull.forEach((e) => {
+        e.classList.remove("hidden");
+      });
+      btnCheckout.innerText = "Back to shopping";
+      btnContinueShipping.innerText = "Back to shopping";
+    } else {
+      cartNull.forEach((e) => {
+        e.classList.add("hidden");
+      });
+      btnCheckout.innerText = "Check out";
+      btnContinueShipping.innerText = "Continue to shipping";
+    }
   },
+
   renderCartBox: function () {
     const htmls = app.cart.map((e) => {
       return `
@@ -187,6 +232,7 @@ const app = {
       `;
     });
     cartContent.innerHTML = htmls.join("");
+    cartFullContent.innerHTML = htmls.join("");
   },
   renderCartLength: function () {
     let cartQuantity = 0;
