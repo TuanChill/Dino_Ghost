@@ -210,7 +210,7 @@ const app = {
               <span class="product-title">
                 ${e.name}
               </span>
-              <img class="delete-product-btn" src="./assets/Icons/DeleteIcon.png" alt="delete this product">
+              <img class="delete-product-btn" src="./assets/Icons/deleteIcon.svg" alt="delete this product">
             </div>
             <div class="product-content">
               <span class="name">
@@ -221,9 +221,9 @@ const app = {
                   $${e.price}
                 </span>
                 <div class="product-quantity">
-                  <img class="btn-sub" src="./assets/Icons/SubIcon.png" alt="">
+                  <img class="btn-sub" src="./assets/Icons/SubIcon.svg" alt="">
                   <span class="quantity">${e.quantity}</span>
-                  <img class="btn-plus" src="./assets/Icons/PlusIcon.png" alt="">
+                  <img class="btn-plus" src="./assets/Icons/PlusIcon.svg" alt="">
                 </div>
               </div>
             </div>
