@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
           IconFinishOrder.src = "./assets/Icons/success-icon.svg";
           app.cart = [];
           app.cartLocal.setCartLocal([]);
+          app.renderCartBox();
           app.toggleCartNull();
           app.renderCartLength();
         })

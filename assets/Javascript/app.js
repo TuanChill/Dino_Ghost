@@ -110,12 +110,13 @@ const app = {
         const deleteBtn = e.target.closest(".delete-product-btn");
         // get this product clicked
         const clickedProduct = app.cart.find((e) => e.code === productCode);
+        const clickedProductIndex = app.cart.findIndex((e) => e.code === productCode);
         // filter cart to not have this product
         const newCart = app.cart.filter((e) => e.code !== productCode);
         const deleteProduct = () => {
           app.cart = newCart;
           app.renderCartLength();
-          app.cartLocal.setCartLocal(newCart);
+          app.cartLocal.setCartLocal([]);
           app.toggleCartNull();
           product.remove();
           app.renderCartBox();
@@ -128,14 +129,14 @@ const app = {
         const plusBtn = e.target.closest(".btn-plus");
         const subBtn = e.target.closest(".btn-sub");
         if (plusBtn) {
-          app.cart = [...newCart, { ...clickedProduct, quantity: ++clickedProduct.quantity }];
+          app.cart[clickedProductIndex] = { ...clickedProduct, quantity: ++clickedProduct.quantity };
           app.cartLocal.setCartLocal(app.cart);
           app.renderCartLength();
           app.renderCartBox();
         }
         if (subBtn) {
           if (clickedProduct.quantity > 1) {
-            app.cart = [...newCart, { ...clickedProduct, quantity: --clickedProduct.quantity }];
+            app.cart[clickedProductIndex] = { ...clickedProduct, quantity: --clickedProduct.quantity };
             app.cartLocal.setCartLocal(app.cart);
             app.renderCartBox();
             app.renderCartLength();
