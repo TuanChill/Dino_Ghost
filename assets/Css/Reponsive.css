@@ -3,11 +3,11 @@
 @media (max-width: 480px) {
   .container {
     flex-direction: row-reverse;
-    padding: 24px;
+    padding: 40px 24px 0;
   }
 
   .toast-message .wrapper {
-    width: 210px;
+    width: 250px;
     height: 60px;
     font-size: 1.4rem;
   }
@@ -98,7 +98,7 @@
   }
 
   .menu-btn {
-    margin-top: 22px;
+    margin-top: 36px;
   }
 
   .socials {
