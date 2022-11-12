@@ -34,6 +34,17 @@ const cartTotalPrice = $(".cart-total-price span");
 const shipInfo = $(".ship-info");
 const iconBackToCart = $(".icon-back");
 
+document.addEventListener(
+  "touchmove",
+  function (event) {
+    event = event.originalEvent || event;
+    if (event.scale !== 1) {
+      event.preventDefault();
+    }
+  },
+  false
+);
+
 const app = {
   currentProductIndex: 1,
   cart: [],
