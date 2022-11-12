@@ -4,6 +4,7 @@ const $$ = document.querySelectorAll.bind(document);
 const CART_LOCAL = "DINO_CART";
 
 const productCard = $(".content");
+const container = $(".container");
 const closeBtnNav = $(".close-btn");
 const navBar = $(".nav-bar");
 const menuBtn = $(".menu-btn");
@@ -13,22 +14,34 @@ const productPreview = $(".product-preview");
 const cartLength = $(".cart-length");
 const toastWrapper = $(".toast-message .wrapper");
 const cartBox = $(".cart-box");
-const closeCart = $(".cart-box .close-btn");
-const cartContent = $(".cart-content");
+const closeCart = $$(".close-btn");
+const cartContent = $(".cart-box .cart-content");
 const cartIcon = $(".cart-icon");
-const subQuantityBtn = $(".btn-sub");
-const plusQuantityBtn = $(".btn-plus");
-const cartNull = $(".cart-null");
+const cartNull = $$(".cart-null");
+const btnCheckout = $(".btn-checkout");
+const cartFullContent = $(".cart-box-full .cart-content");
+const cartFullBox = $(".cart-box-full");
+const btnContinueShipping = $(".cart-box-full .btn-continue");
+const btnFinishOrder = $(".btn-finish-order");
+const IconFinishOrder = $(".order-res-icon");
+const orderRes = $(".order-respon");
+const paymentEle = $(".payment");
+const btnBackToCart = $(".btn-to-cart");
+const productsPriceEle = $(".products-price");
+const totalPriceEle = $(".price-total-end");
+const shippingPriceEle = $(".shipping-price");
+const shipValue = $('input[name="ship"]:checked');
 
 const app = {
   currentProductIndex: 1,
   cart: [],
   products: [],
+  orderRes: {},
   currentProduct: {},
   cartLocal: {
     getCartLocal: function () {
       const data = window.localStorage.getItem(CART_LOCAL);
-      app.cart = JSON.parse(data);
+      app.cart = JSON.parse(data) || [];
     },
     setCartLocal: function (cart) {
       window.localStorage.setItem(CART_LOCAL, JSON.stringify(cart));
@@ -88,28 +101,88 @@ const app = {
     cartIcon.addEventListener("click", function () {
       cartBox.classList.toggle("hidden");
     });
-    //handle hide cart-box
-    closeCart.addEventListener("click", function () {
-      cartBox.classList.toggle("hidden");
-    });
-    //hanlde click outside cart-box
-    window.addEventListener("click", function (e) {
-      if (e.target != cartBox && e.target != cartIcon) cartBox.classList.add("hidden");
-    });
-    //handle delete product in cart
-    cartContent.addEventListener("click", function (e) {
-      const product = e.target.closest(".cart-item");
-      const productCode = product.dataset.index;
-      const deleteBtn = e.target.closest(".delete-product-btn");
-      if (deleteBtn) {
+    //  handle logic cart
+    [cartContent, cartFullContent].forEach((e) => {
+      e.addEventListener("click", function (e) {
+        //handle delete product in cart
+        const product = e.target.closest(".cart-item");
+        const productCode = product.dataset.index;
+        const deleteBtn = e.target.closest(".delete-product-btn");
+        // get this product clicked
+        const clickedProduct = app.cart.find((e) => e.code === productCode);
+        // filter cart to not have this product
         const newCart = app.cart.filter((e) => e.code !== productCode);
-        app.cart = newCart;
-        app.renderCartLength();
-        app.cartLocal.setCartLocal(newCart);
-        app.toggleCartNull();
-        product.remove();
+        const deleteProduct = () => {
+          app.cart = newCart;
+          app.renderCartLength();
+          app.cartLocal.setCartLocal(newCart);
+          app.toggleCartNull();
+          product.remove();
+          app.renderCartBox();
+          app.renderPricePay();
+        };
+        if (deleteBtn) {
+          deleteProduct();
+        }
+        // handle quantity change
+        const plusBtn = e.target.closest(".btn-plus");
+        const subBtn = e.target.closest(".btn-sub");
+        if (plusBtn) {
+          app.cart = [...newCart, { ...clickedProduct, quantity: ++clickedProduct.quantity }];
+          app.cartLocal.setCartLocal(app.cart);
+          app.renderCartLength();
+          app.renderCartBox();
+        }
+        if (subBtn) {
+          if (clickedProduct.quantity > 1) {
+            app.cart = [...newCart, { ...clickedProduct, quantity: --clickedProduct.quantity }];
+            app.cartLocal.setCartLocal(app.cart);
+            app.renderCartBox();
+            app.renderCartLength();
+          } else {
+            deleteProduct();
+          }
+        }
+      });
+    });
+    //handle hide cart-box
+    closeCart.forEach((e) => {
+      e.addEventListener("click", function () {
+        cartBox.classList.toggle("hidden");
+        cartFullBox.classList.add("hidden");
+      });
+    });
+    // handle lick btn checkout cart
+    btnCheckout.addEventListener("click", function () {
+      if (app.cart.length > 0) {
+        cartFullBox.classList.remove("hidden");
+        cartBox.classList.add("hidden");
+      } else {
+        cartBox.classList.add("hidden");
       }
     });
+    //hanlde btn continue to shipping
+    btnContinueShipping.addEventListener("click", function () {
+      cartFullBox.classList.add("hidden");
+      if (app.cart.length !== 0) {
+        paymentEle.classList.remove("hidden");
+      }
+    });
+    // handle onClick btn finish shipping
+    btnFinishOrder.addEventListener("click", function () {
+      orderRes.classList.add("hidden");
+    });
+    // handle onClick btn back to cart
+    btnBackToCart.addEventListener("click", function () {
+      paymentEle.classList.add("hidden");
+      cartFullBox.classList.remove("hidden");
+    });
+    // change pay price when change chip type
+    for (match in $$('input[name="ship"]')) {
+      $$('input[name="ship"]')[match].onchange = function () {
+        app.renderPricePay(this.value);
+      };
+    }
   },
   handleBtnBuy: function () {
     if (app.cart.length > 0) {
@@ -125,7 +198,54 @@ const app = {
     }, 3000);
   },
   toggleCartNull: function () {
-    app.cart.length === 0 ? cartNull.classList.remove("hidden") : cartNull.classList.add("hidden");
+    if (app.cart.length === 0) {
+      cartNull.forEach((e) => {
+        e.classList.remove("hidden");
+      });
+      btnCheckout.innerText = "Back to shopping";
+      btnContinueShipping.innerText = "Back to shopping";
+    } else {
+      cartNull.forEach((e) => {
+        e.classList.add("hidden");
+      });
+      btnCheckout.innerText = "Check out";
+      btnContinueShipping.innerText = "Continue to shipping";
+    }
+  },
+  updateQuantityItem: function () {
+    let cartQuantity = 0;
+    app.cart.forEach((e) => {
+      cartQuantity += e.quantity;
+    });
+    if (cartQuantity === 0) {
+    } else if (cartQuantity === 1) {
+      $(".quantityItem").innerText = `${cartQuantity} Item`;
+    } else {
+      $(".quantityItem").innerText = `${cartQuantity} Items`;
+    }
+  },
+  renderPricePay: function (shipName) {
+    const productsPrice = app.cart.reduce((sum, e) => {
+      return sum + +e.price;
+    }, 0);
+    let shipPrice = 10;
+    switch (shipName) {
+      case "Regular Delivery":
+        shipPrice = 0;
+        break;
+      case "Express Delivery":
+        shipPrice = 10;
+        break;
+      case "VIP Delivery":
+        shipPrice = 20;
+        break;
+      default:
+        break;
+    }
+    shippingPriceEle.innerText = `$${shipPrice}`;
+    const totalPrice = productsPrice + shipPrice;
+    productsPriceEle.innerText = `$${productsPrice}`;
+    totalPriceEle.innerText = `$${totalPrice}`;
   },
   renderCartBox: function () {
     const htmls = app.cart.map((e) => {
@@ -137,7 +257,7 @@ const app = {
               <span class="product-title">
                 ${e.name}
               </span>
-              <img class="delete-product-btn" src="./assets/Icons/DeleteIcon.png" alt="delete this product">
+              <img class="delete-product-btn" src="./assets/Icons/deleteIcon.svg" alt="delete this product">
             </div>
             <div class="product-content">
               <span class="name">
@@ -148,9 +268,9 @@ const app = {
                   $${e.price}
                 </span>
                 <div class="product-quantity">
-                  <img class="btn-sub" src="./assets/Icons/SubIcon.png" alt="">
+                  <img class="btn-sub" src="./assets/Icons/SubIcon.svg" alt="">
                   <span class="quantity">${e.quantity}</span>
-                  <img class="btn-plus" src="./assets/Icons/PlusIcon.png" alt="">
+                  <img class="btn-plus" src="./assets/Icons/PlusIcon.svg" alt="">
                 </div>
               </div>
             </div>
@@ -158,7 +278,10 @@ const app = {
         </div>
       `;
     });
+    app.updateQuantityItem();
+    app.renderPricePay();
     cartContent.innerHTML = htmls.join("");
+    cartFullContent.innerHTML = htmls.join("");
   },
   renderCartLength: function () {
     let cartQuantity = 0;
@@ -166,7 +289,6 @@ const app = {
       app.cart.forEach((e) => {
         cartQuantity += e.quantity;
       });
-      console.log(cartQuantity);
       cartLength.classList.remove("hidden");
       cartLength.innerText = `${cartQuantity}`;
     } else {
@@ -207,6 +329,8 @@ const app = {
     this.renderProducts();
     this.renderCartLength();
     this.handleEvents();
+    this.renderPricePay();
+    this.updateQuantityItem();
   },
 };
 
