@@ -72,6 +72,7 @@ const app = {
         navBar.classList.remove("show-nav");
         cartBox.classList.add("hidden");
         cartFullBox.classList.add("hidden");
+        paymentEle.classList.add("hidden");
       });
     });
     // show nav bar
