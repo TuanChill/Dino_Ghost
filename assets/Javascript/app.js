@@ -27,6 +27,11 @@ const IconFinishOrder = $(".order-res-icon");
 const orderRes = $(".order-respon");
 const paymentEle = $(".payment");
 const btnBackToCart = $(".btn-to-cart");
+const productsPriceEle = $(".products-price");
+const totalPriceEle = $(".price-total-end");
+const shippingPriceEle = $(".shipping-price");
+const shipValue = $('input[name="ship"]:checked');
+
 const app = {
   currentProductIndex: 1,
   cart: [],
@@ -113,6 +118,8 @@ const app = {
           app.cartLocal.setCartLocal(newCart);
           app.toggleCartNull();
           product.remove();
+          app.renderCartBox();
+          app.renderPricePay();
         };
         if (deleteBtn) {
           deleteProduct();
@@ -170,6 +177,12 @@ const app = {
       paymentEle.classList.add("hidden");
       cartFullBox.classList.remove("hidden");
     });
+    // change pay price when change chip type
+    for (match in $$('input[name="ship"]')) {
+      $$('input[name="ship"]')[match].onchange = function () {
+        app.renderPricePay(this.value);
+      };
+    }
   },
   handleBtnBuy: function () {
     if (app.cart.length > 0) {
@@ -199,7 +212,41 @@ const app = {
       btnContinueShipping.innerText = "Continue to shipping";
     }
   },
-
+  updateQuantityItem: function () {
+    let cartQuantity = 0;
+    app.cart.forEach((e) => {
+      cartQuantity += e.quantity;
+    });
+    if (cartQuantity === 0) {
+    } else if (cartQuantity === 1) {
+      $(".quantityItem").innerText = `${cartQuantity} Item`;
+    } else {
+      $(".quantityItem").innerText = `${cartQuantity} Items`;
+    }
+  },
+  renderPricePay: function (shipName) {
+    const productsPrice = app.cart.reduce((sum, e) => {
+      return sum + +e.price;
+    }, 0);
+    let shipPrice = 10;
+    switch (shipName) {
+      case "Regular Delivery":
+        shipPrice = 0;
+        break;
+      case "Express Delivery":
+        shipPrice = 10;
+        break;
+      case "VIP Delivery":
+        shipPrice = 20;
+        break;
+      default:
+        break;
+    }
+    shippingPriceEle.innerText = `$${shipPrice}`;
+    const totalPrice = productsPrice + shipPrice;
+    productsPriceEle.innerText = `$${productsPrice}`;
+    totalPriceEle.innerText = `$${totalPrice}`;
+  },
   renderCartBox: function () {
     const htmls = app.cart.map((e) => {
       return `
@@ -231,6 +278,8 @@ const app = {
         </div>
       `;
     });
+    app.updateQuantityItem();
+    app.renderPricePay();
     cartContent.innerHTML = htmls.join("");
     cartFullContent.innerHTML = htmls.join("");
   },
@@ -280,6 +329,8 @@ const app = {
     this.renderProducts();
     this.renderCartLength();
     this.handleEvents();
+    this.renderPricePay();
+    this.updateQuantityItem();
   },
 };
 

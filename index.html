@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="./assets/Icons/Dino-Ghost.png" type="image/gif" sizes="16x16" />
+    <link rel="icon" href="./assets/Icons/dinoghost.svg" type="image/gif" sizes="16x16" />
     <link rel="stylesheet" href="./assets/Css/Reset.css" />
     <link rel="stylesheet" href="./assets/Css/Styles.css" />
     <link rel="stylesheet" href="./assets/Css/Reponsive.css" />
@@ -25,7 +25,7 @@
       <div class="cart-box-full overlay hidden">
         <div class="wrapper">
           <div class="cart-header">
-            <h5 class="cart-title">Shopping Cart</h5>
+            <h5 class="cart-title">Shopping Cart (<span class="quantityItem">1 Item</span>)</h5>
             <img class="close-btn" src="./assets/Icons/CloseIcon.svg" alt="Close this cart box" />
           </div>
           <div class="cart-content"></div>
@@ -46,87 +46,94 @@
             <img class="close-btn" src="./assets/Icons/CloseIcon.svg" alt="Close this cart box" />
           </div>
           <form action="" method="POST" class="form" id="form-1">
-          <div class="pay-content">
-            <div class="ship-info">
-              <h5 class="title">Shipping Infomation</h5>
-              <div class="form-group">
-                <label for="fullname" class="form-label">Full name<span class="text-required">*</span></label>
-                <input id="fullname" name="fullname" type="text" placeholder="Full name" class="form-control" />
-                <span class="form-message"></span>
-              </div>
+            <div class="pay-content">
+              <div class="ship-info">
+                <h5 class="title">Shipping Infomation</h5>
+                <div class="form-group">
+                  <label for="fullname" class="form-label">Full name<span class="text-required">*</span></label>
+                  <input id="fullname" name="fullname" type="text" placeholder="Full name" class="form-control" />
+                  <span class="form-message"></span>
+                </div>
 
-              <div class="form-group">
-                <label for="email" class="form-label">Email<span class="text-required">*</span></label>
-                <input id="email" name="email" type="text" placeholder="email@domain.com" class="form-control" />
-                <span class="form-message"></span>
-              </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">Email<span class="text-required">*</span></label>
+                  <input id="email" name="email" type="text" placeholder="email@domain.com" class="form-control" />
+                  <span class="form-message"></span>
+                </div>
 
-              <div class="form-group">
-                <label for="phone" class="form-label">Phone<span class="text-required">*</span></label>
-                <input id="phone" name="phone" type="text" placeholder="Phone" class="form-control" />
-                <span class="form-message"></span>
-              </div>
+                <div class="form-group">
+                  <label for="phone" class="form-label">Phone<span class="text-required">*</span></label>
+                  <input id="phone" name="phone" type="text" placeholder="Phone" class="form-control" />
+                  <span class="form-message"></span>
+                </div>
 
-              <div class="form-group">
-                <label for="address" class="form-label">Address<span class="text-required">*</span></label>
-                <input id="address" name="address" placeholder="Address" type="text" class="form-control" />
-                <span class="form-message"></span>
+                <div class="form-group">
+                  <label for="address" class="form-label">Address<span class="text-required">*</span></label>
+                  <input id="address" name="address" placeholder="Address" type="text" class="form-control" />
+                  <span class="form-message"></span>
+                </div>
+              </div>
+              <div class="ship-price">
+                <div class="ship-method">
+                  <h5 class="title">Shipping method</h5>
+                  <div class="form-shiptype">
+                    <input
+                      type="radio"
+                      id="Regular Delivery"
+                      name="ship"
+                      value="Regular Delivery"
+                      class="ship-control" />
+                    <label for="Regular Delivery" class="ship-label">Regular Delivery (Free, 5 days)</label>
+                  </div>
+                  <div class="form-shiptype">
+                    <input
+                      checked
+                      type="radio"
+                      id="Express Delivery"
+                      name="ship"
+                      value="Express Delivery"
+                      class="ship-control" />
+                    <label for="Express Delivery" class="ship-label">Express Delivery ($10, 3 days)</label>
+                  </div>
+                  <div class="form-shiptype">
+                    <input type="radio" id="VIP Delivery" name="ship" value="VIP Delivery" class="ship-control" />
+                    <label for="VIP Delivery" class="ship-label">VIP Delivery ($20, 1 days)</label>
+                  </div>
+                  <span class="form-message"></span>
+                </div>
+                <div class="separate-ship"></div>
+                <div class="price-total">
+                  <p class="price-item">
+                    <span class="title">Shipping Price:</span>
+                    <span class="shipping-price">$10</span>
+                  </p>
+                  <p class="price-item">
+                    <span class="title">Product Price:</span>
+                    <span class="products-price">$10</span>
+                  </p>
+                  <p class="price-item">
+                    <span class="title">Discount:</span>
+                    <span class="discount-price">0</span>
+                  </p>
+                  <p class="total">
+                    <span class="title">Total Price:</span>
+                    <span class="price-total-end">$10</span>
+                  </p>
+                </div>
               </div>
             </div>
-            <div class="ship-price">
-              <div class="ship-method">
-                <h5 class="title">Shipping method</h5>
-                <div class="form-shiptype">
-                  <input type="radio" id="Regular Delivery" name="ship" value="Regular Delivery" class="ship-control" />
-                  <label for="Regular Delivery" class="ship-label">Regular Delivery (Free, 5 days)</label>
-                </div>
-                <div class="form-shiptype">
-                  <input checked type="radio" id="Express Delivery" name="ship" value="Express Delivery" class="ship-control" />
-                  <label for="Express Delivery" class="ship-label">Express Delivery ($10, 3 days)</label>
-                </div>
-                <div class="form-shiptype">
-                  <input type="radio" id="VIP Delivery" name="ship" value="VIP Delivery" class="ship-control" />
-                  <label for="VIP Delivery" class="ship-label">VIP Delivery ($20, 1 days)</label>
-                </div>
-                <span class="form-message"></span>
-              </div>
-              <div class="separate-ship"></div>
-              <div class="price-total">
-                <p class="price-item">
-                  <span class="title">Shipping Price:</span>
-                  <span class="shipping-price">$10</span>
-                </p>
-                <p class="price-item">
-                  <span class="title">Product Price:</span>
-                  <span class="products-price">$10</span>
-                </p>
-                <p class="price-item">
-                  <span class="title">Discount:</span>
-                  <span class="discount-price">$10</span>
-                </p>
-                <p class="total">
-                  <span class="title">Total Price:</span>
-                  <span class="price-total-end">$10</span>
-                </p>
-              </div>
+            <div class="controls-pay">
+              <span class="btn-to-cart"> Back To Cart </span>
+              <button class="form-submit btn-order btn-primary">Finish Order</button>
             </div>
-          </div>
-          <div class="controls-pay">
-            <span class="btn-to-cart">
-              Back To Cart
-            </span>
-            <button class="form-submit btn-order btn-primary">
-              Finish Order
-            </button>
-          </div>
-        </form>
+          </form>
         </div>
       </div>
       <div class="order-respon overlay hidden">
         <div class="wrapper">
-            <img class="order-res-icon" src="./assets/Icons/success-icon.svg" alt="">
-            <p class="title">Order Success</p>
-            <button class="btn-finish-order btn-primary">Continue Shopping</button>
+          <img class="order-res-icon" src="./assets/Icons/success-icon.svg" alt="" />
+          <p class="title">Order Success</p>
+          <button class="btn-finish-order btn-primary">Continue Shopping</button>
         </div>
       </div>
       <!-- sidebar -->
