@@ -25,24 +25,28 @@
       <div class="cart-box-full overlay hidden">
         <div class="wrapper">
           <div class="cart-header">
-            <h5 class="cart-title">Shopping Cart (<span class="quantityItem">1 Item</span>)</h5>
+            <h5 class="cart-title">Shopping Cart (<span class="quantityItem">0 Item</span>)</h5>
             <img class="close-btn" src="./assets/Icons/CloseIcon.svg" alt="Close this cart box" />
           </div>
           <div class="cart-content"></div>
+          <p class="cart-total-price">Total Price:   <span></span></p>
           <div class="cart-null hidden">
             <p class="cart-null">
               <img class="cart-null-icon" src="./assets/Icons/warning.svg" alt="Cart-null" />
               <span>Your Shopping Cart is empty</span>
             </p>
           </div>
-          <button class="btn-continue">Continue to Shipping</button>
+          <button class="btn-continue btn-primary">Continue to Shipping</button>
         </div>
       </div>
       <!-- payment -->
       <div class="payment overlay hidden">
         <div class="wrapper">
           <div class="pay-header">
-            <h5 class="pay-title">Shipping</h5>
+            <div class="title-box">
+              <img src="./assets/Icons/backIcon.svg" alt="" class="icon-back">
+              <h5 class="pay-title">Shipping</h5>
+            </div>
             <img class="close-btn" src="./assets/Icons/CloseIcon.svg" alt="Close this cart box" />
           </div>
           <form action="" method="POST" class="form" id="form-1">

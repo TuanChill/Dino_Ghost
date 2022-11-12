@@ -6,10 +6,15 @@
     padding: 24px;
   }
 
-  .cart {
-    padding-right: 70px;
+  .toast-message .wrapper {
+    width: 210px;
+    height: 60px;
+    font-size: 1.4rem;
   }
 
+  .cart {
+    margin-right: 70px;
+  }
 
   .cart .cart-length {
     width: 15px;
@@ -18,6 +23,69 @@
     line-height: 15px;
     top: -4px;
     left: 21px
+  }
+
+  .cart-null {
+    justify-content: center;
+  }
+
+  .icon-back {
+    display: inline-block;
+    margin-right: 12px;
+  }
+
+  .cart-box-full .wrapper {
+    width: 100vh;
+    height: 100vh;
+    padding: 32px;
+    border-radius: 0;
+  }
+
+  .payment .wrapper {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    overflow-y: auto;
+    padding: 32px;
+  }
+
+  .btn-to-cart {
+    display: none;
+  }
+
+  .controls-pay {
+    margin-top: 40px;
+    width: 100%;
+  }
+
+  .btn-order {
+    margin-left: 0;
+    margin-bottom: 72px;
+    width: 100%;
+  }
+
+  .ship-info {
+    width: 100%;
+    margin-top: 34px;
+    margin-right: 0;
+  }
+
+  .pay-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-total-price {
+    margin-right: 0;
+    margin-top: 27px;
+    display: block;
+    text-align: center;
+  }
+
+  .cart-box-full .btn-continue {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .sidebar {
@@ -58,7 +126,9 @@
   }
 
   .nav-bar .close-btn {
-    display: block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 26px;
     right: 26px;
@@ -165,5 +235,19 @@
 
   .show-nav {
     transform: translateX(0%);
+  }
+
+  .pay-header .title-box {
+    display: inline-flex;
+  }
+  .order-respon .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 100vh;
+    height: 100vh;
+    border-radius: 0;
   }
 }

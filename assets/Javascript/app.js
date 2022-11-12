@@ -5,7 +5,7 @@ const CART_LOCAL = "DINO_CART";
 
 const productCard = $(".content");
 const container = $(".container");
-const closeBtnNav = $(".close-btn");
+const closeBtnNav = $$(".close-btn");
 const navBar = $(".nav-bar");
 const menuBtn = $(".menu-btn");
 const BtnBuy = $(".btn-buy");
@@ -14,7 +14,6 @@ const productPreview = $(".product-preview");
 const cartLength = $(".cart-length");
 const toastWrapper = $(".toast-message .wrapper");
 const cartBox = $(".cart-box");
-const closeCart = $$(".close-btn");
 const cartContent = $(".cart-box .cart-content");
 const cartIcon = $(".cart-icon");
 const cartNull = $$(".cart-null");
@@ -31,6 +30,9 @@ const productsPriceEle = $(".products-price");
 const totalPriceEle = $(".price-total-end");
 const shippingPriceEle = $(".shipping-price");
 const shipValue = $('input[name="ship"]:checked');
+const cartTotalPrice = $(".cart-total-price span");
+const shipInfo = $(".ship-info");
+const iconBackToCart = $(".icon-back");
 
 const app = {
   currentProductIndex: 1,
@@ -65,12 +67,16 @@ const app = {
       }
     });
     // close nav bar
-    closeBtnNav.addEventListener("click", function () {
-      navBar.classList.toggle("show-nav");
+    closeBtnNav.forEach((e) => {
+      e.addEventListener("click", function () {
+        navBar.classList.remove("show-nav");
+        cartBox.classList.add("hidden");
+        cartFullBox.classList.add("hidden");
+      });
     });
     // show nav bar
     menuBtn.addEventListener("click", function () {
-      navBar.classList.toggle("show-nav");
+      navBar.classList.add("show-nav");
     });
     // handle show toast when click btn buy
     BtnBuy.addEventListener("click", function () {
@@ -99,7 +105,11 @@ const app = {
     });
     //handle show cart-box
     cartIcon.addEventListener("click", function () {
-      cartBox.classList.toggle("hidden");
+      if (window.innerWidth > 480) {
+        cartBox.classList.toggle("hidden");
+      } else {
+        cartFullBox.classList.toggle("hidden");
+      }
     });
     //  handle logic cart
     [cartContent, cartFullContent].forEach((e) => {
@@ -146,13 +156,6 @@ const app = {
         }
       });
     });
-    //handle hide cart-box
-    closeCart.forEach((e) => {
-      e.addEventListener("click", function () {
-        cartBox.classList.toggle("hidden");
-        cartFullBox.classList.add("hidden");
-      });
-    });
     // handle lick btn checkout cart
     btnCheckout.addEventListener("click", function () {
       if (app.cart.length > 0) {
@@ -184,6 +187,10 @@ const app = {
         app.renderPricePay(this.value);
       };
     }
+    iconBackToCart.addEventListener("click", function () {
+      paymentEle.classList.add("hidden");
+      cartFullBox.classList.remove("hidden");
+    });
   },
   handleBtnBuy: function () {
     if (app.cart.length > 0) {
@@ -219,6 +226,7 @@ const app = {
       cartQuantity += e.quantity;
     });
     if (cartQuantity === 0) {
+      $(".quantityItem").innerText = `0 Item`;
     } else if (cartQuantity === 1) {
       $(".quantityItem").innerText = `${cartQuantity} Item`;
     } else {
@@ -262,7 +270,7 @@ const app = {
             </div>
             <div class="product-content">
               <span class="name">
-                #${e.type.toUpperCase()}
+                #${e?.type?.toUpperCase()}
               </span>
               <div class="main">
                 <span class="price">
@@ -283,6 +291,9 @@ const app = {
     app.renderPricePay();
     cartContent.innerHTML = htmls.join("");
     cartFullContent.innerHTML = htmls.join("");
+    cartTotalPrice.innerText = `$${app.cart.reduce((sum, e) => {
+      return sum + +e.price;
+    }, 0)}`;
   },
   renderCartLength: function () {
     let cartQuantity = 0;
