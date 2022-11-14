@@ -34,6 +34,7 @@ const cartTotalPrice = $(".cart-total-price span");
 const shipInfo = $(".ship-info");
 const iconBackToCart = $(".icon-back");
 
+// prevent scale and zoom on mobile devices
 document.addEventListener(
   "touchmove",
   function (event) {
