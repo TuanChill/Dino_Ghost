@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
     onSubmit: function (data) {
       // Call API
       async function postData(url = "", data = {}) {
-        // Default options are marked with *
         const response = await fetch(url, {
           method: "POST",
           body: JSON.stringify(data),
