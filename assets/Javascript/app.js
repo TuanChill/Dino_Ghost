@@ -134,10 +134,8 @@ const app = {
         // get this product clicked
         const clickedProduct = app.cart.find((e) => e.code === productCode);
         const clickedProductIndex = app.cart.findIndex((e) => e.code === productCode);
-        // filter cart to not have this product
-        const newCart = app.cart.filter((e) => e.code !== productCode);
         const deleteProduct = () => {
-          app.cart = newCart;
+          app.cart = [];
           app.renderCartLength();
           app.cartLocal.setCartLocal([]);
           app.toggleCartNull();
